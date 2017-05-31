@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        {{message}}
+    </div>
+
+    <div id="app-2">
+        <span v-bind:title="message"><!-- v-bind属性成为指令 -->
+            绑定title
+        </span>
+    </div>
+
+    <!-- v-if指令控制切换一个元素的显示-->
+    <div id="app-3">
+        <p v-if="seen">现在你看到我了</p>
+    </div>
+
+    <!-- v-for指令可以绑定数组的数据来渲染一个项目列表 -->
+    <div id="app-4">
+        <ol>
+            <li v-for="todo in todos">
+                {{todo.text}}
+            </li>
+        </ol>
+    </div>
+
+    <!-- v-on指令绑定一个事件监听器，通过它调用Vue实例中的方法 -->
+    <div id="app-5">
+        <span>{{message}}</span>
+        <button v-on:click="reverMessage">逆转文字</button>
+    </div>
+
+    <!-- v-model指令能够实现表单输入与应用状态之间的双向绑定 -->
+    <div id="app-6">
+        <p>{{message}}</p>
+        <input type="text" name="text" v-model="message" />
+        <!--双向绑定，input更改了message也跟着一起更改-->
+    </div>
+    <p>每个Vue实例都会代理其data对象里所有的属性</p>
+    <figure>
+        <figcaption>生命周期图示</figcaption>
+        <img width="600px" src="https://cn.vuejs.org/images/lifecycle.png" alt="Vue生命周期">
+    </figure>
+
+    <script src="../vue.js"></script>
+    <script>
+        var data = {
+            message:"Hello Vue!",
+            seen:true,
+            todos:[
+                {text:"学习JavaScript"},
+                {text:"学习Vue"},
+                {text:"整个牛项目"}
+            ]
+        }
+        var app = new Vue({
+            el:'#app',
+            data:data
+        })
+        var app2 = new Vue({
+            el: '#app-2',
+            data: data
+        })
+        var app3 = new Vue({
+            el:'#app-3',
+            data:data
+        })
+        var app4 = new Vue({
+            el:'#app-4',
+            data:data
+        })
+        data.todos.push({text:"添加数组元素"});//能够添加数组元素
+        //尝试更改数组元素
+        setTimeout(function(){
+            data.todos[1]={text:"接着学习Vue"}
+        },2000)
+
+        var app5 = new Vue({
+            el:'#app-5',
+            data:data,
+            methods:{
+                reverMessage:function(){
+                    this.message = this.message.split("").reverse().join("");
+                }
+            }
+        })
+        var app6 = new Vue({
+            el:'#app-6',
+            data:data
+        })
+        //data数据是双向绑定的，是响应式的
+        //如果在实例创建之后添加新的属性到实例上，它不会触发视图更新。
+        console.log(app.message===data.message);
+        
+    </script>
+</body>
+</html>
