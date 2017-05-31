@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue学习-模板语法</title>
+</head>
+<body>
+    <p>//数据绑定的最常见的语法是使用双大括号进行绑定，双大括号会将数据揭示成纯文本。</p>
+    <div id="app">
+        <p>{{html}}</p>
+    </div>
+    <p>//输入真正的HTML，使用指令v-html，但是需要注意不要随便在网站渲染动态的HTML，可能会引起安全隐患。</p>
+    <div id="app1">
+        <p v-html="html"></p>
+    </div>
+    <p>//双大括号绑定数据不能使用在属性上，属性绑定数据需要使用v-bind指令,指定 ：后的是<strong>参数</strong></p>
+    <div id="app2">
+        <div v-bind:id="diyId">使用指令绑定id属性</div>
+        <button v-bind:disabled="disabled">按钮</button>
+        <p>{{number + 1}}</p>
+        <p>{{message.split('').reverse().join('')}}</p>
+    </div>
+    <p>//数据绑定可以使用简单的单个表达式</p>
+    <p>//修饰符 "."，示例阻止表单提交默认行为</p>
+    <div id="app3">
+        <form v-on:submit.prevent="onSubmit">
+            <input type="text" name="name"/>
+            <button>提交</button>
+        </form>
+    </div>
+    <p>//过滤器 "|"</p>
+    <div id="app4">
+        {{message | capitalize }}
+    </div>
+    <p>//v-bind缩写":"，v-on缩写"@"</p>
+    <script src="./vue.js"></script>
+    <script>   
+        var data={
+            html:'<span>插入的值</span>'
+        }
+        var app = new Vue({
+            el:'#app',
+            data:data
+        })
+        var app1 = new Vue({
+            el:'#app1',
+            data:data
+        })
+        var app2 = new Vue({
+            el:'#app2',
+            data:{
+                diyId:"myId",
+                disabled:true,
+                number:2,
+                message:'hello zhangyanwei!'
+            }
+        })
+        var app3 = new Vue({
+            el:'#app3',
+            methods:{
+                onSubmit:function(){
+                    console.log("阻止form默认行为");
+                }
+            }
+        })
+        var app4 = new Vue({
+            el:'#app4',
+            data:{
+                message:"hello World"
+            },
+            filters:{
+                capitalize :function(value){
+                    if (!value) return ''
+                    value = value.toString();
+                    return value.charAt(0).toUpperCase() + value.slice(1)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
