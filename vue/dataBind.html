@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>双向数据绑定</title>
+</head>
+<body>
+    <input type="text" id="input" value="hello">
+</body>
+<script>
+    var data = {};
+    var input = document.getElementById("input");
+    Object.defineProperty(data,"name",{
+        get:function(){
+            return input.value;
+        },
+        set:function(newValue){
+            input.value = newValue;
+        }
+    })
+</script>
+</html>
