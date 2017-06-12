@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue学习-class与style绑定</title>
+    <style>
+    .static{
+        font-size: 20px;
+    }
+    .red{
+        color: red;
+    }
+    .gray{
+        color: gray;
+    }
+    .back{
+        background-color:palegreen;
+    }
+    </style>
+</head>
+<body>
+    <div id="app-1">
+        <span class="static" v-bind:class="{red:isRed}">我们可以传给v-bind一个对象，动态的切换class</span>
+        <span v-bind:class="classObj">也可以直接绑定数据中的一个对象</span>
+        <span v-bind:class="calObj">也可以返回对象的计算属性</span>
+        <span v-bind:class="[grayClass,bacClass]">也可以传给v:bind:class一个数组，</span>
+        <p v-bind:class="[{red:isRed},bacClass]">可以在数组中使用对象语法</p>
+        <p v-bind:style="styleObj">对象语法绑定style</p>
+        <p v-bind:style="[styleObj,styleObj2]">使用数组语法可以将多个样式对象绑定到一个元素上</p>
+    </div>    
+
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:'#app-1',
+            data:{
+                isRed:true,
+                classObj:{
+                    red:false,
+                    static:true
+                },
+                grayClass:'gray',
+                bacClass:'back',
+                styleObj:{
+                    fontSize:'16px',
+                    backgroundColor:'pink'
+                },
+                styleObj2:{
+                    color:'#fff',
+                    lineHeight:'50px'
+                }
+            },
+            computed:{
+                calObj:function(){
+                    return {
+                        red:this.isRed
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
