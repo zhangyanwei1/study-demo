@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue学习-条件渲染</title>
+</head>
+<body>
+    <div id="example">
+        <h1 v-if="ok">YES</h1>
+        <h1 v-else>No</h1>
+        <template v-if="ok">
+            <p>这是template渲染的条件代码块</p>
+        </template>
+        <div v-if="type === 'A'">
+            if:A
+        </div>
+        <div v-else-if="type === 'B'">
+            else if:B
+        </div>
+        <div v-else-if="type === 'C'">
+            else if:C
+        </div>
+        <div v-else>
+            else:Not A/B/C
+        </div>
+        <p>//Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染。
+            这么做，除了使 Vue 变得非常快之外，还有一些有用的好处。</p>
+        <p>// Vue 为你提供了一种方式来声明“这两个元素是完全独立的——不要复用它们”。
+                只需添加一个具有唯一值的 key 属性即可</p>
+        <template v-if="loginType ==='username'">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="输入用户名" key="user-input"/>
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input type="text" name="username" placeholder="输入你的邮箱" key="email-input"/>
+        </template>
+        <button v-on:click="toggle">切换输入</button>
+        <h2 v-show="ok">Show</h2>
+        <p>// v-show 的元素始终会被渲染并保留在 DOM 中。
+            v-show 是简单地切换元素的 CSS 属性 display 。</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:'#example',
+            data:{
+                ok:true,
+                type:'A',
+                loginType:'username'
+            },
+            methods:{
+                toggle:function(){
+                    this.loginType = this.loginType !== 'username'?'username':'email'
+                }
+            }
+        })
+    </script>
+</body>
+</html>
