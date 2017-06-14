@@ -8,10 +8,32 @@
 </head>
 <body>
     <ul id="example-1"> 
-        <li v-for="(item,index) in items">
+        <li v-for="(item,index) of items">
             {{message}}--{{item.text}}-{{index}}
         </li>
     </ul>
+
+    <div id="example-2">
+            <template v-for="item in items">
+                <p>
+                    <span>{{item.key}}</span>
+                    <span>{{item.value}}</span>
+                </p>
+            </template>
+            <div>
+                <span v-for="n in 10">{{ n }} </span>
+            </div>
+            <div>
+                <span v-for="n in evenNumbers">{{n}} </span>
+            </div>
+    </div>
+
+    <ul id="repeat-object">
+        <li v-for="(value,key,index) in object">
+            {{index}}.{{key}}:{{value}}
+        </li>
+    </ul>
+    
     <script src="./vue.js"></script>
     <script>
         var example = new Vue({
@@ -22,6 +44,41 @@
                     {text:"数组第一项"},
                     {text:"数组第二项"}
                 ]
+            }
+        })
+
+        new Vue({
+            el:'#example-2',
+            data:{
+                items:[
+                    {
+                        key:"name",
+                        value:"zhangyanwei"
+                    },{
+                        key:"age",
+                        value:22
+                    }
+                ],
+                numbers:[1,2,3,4,5]
+            },
+            computed:{
+                evenNumbers:function(){
+                    return this.numbers.filter(function(number){
+                        return number % 2 === 0
+                    })
+                }
+            }
+        })
+
+        new Vue({
+            el:'#repeat-object',
+            data:{
+                object:{
+                    FirstName:"Zhang",
+                    LastName:"Yanwei",
+                    Age:22
+                }
+                
             }
         })
     </script>
