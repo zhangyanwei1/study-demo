@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表单基础知识学习（一）</title>
+</head>
+<body>
+    <div>
+        <form action="https://github.com/zhangyanwei1" method="get" name="register">
+            <input type="text" name="username">
+            <input type="text" name="phone">
+            <input id="submitRegister" type="submit" value="注册">
+            <input type="reset" value="重置">
+        </form>
+
+        <form name="search">
+            <input type="text" name="usernameS">
+            <input type="text" name="phoneS">
+        </form>
+    </div>
+
+    <script>
+        /**
+        * 取得表单的方法：
+        * 第一是通过定义ID
+        * 第二是通过forms 数值索引
+        * 第三是通过forms name值取得特定名字的表单
+        */
+        var firstForm = document.forms[0];
+        var searchForm = document.forms['search'];
+        var register = document.getElementById("submitRegister");
+
+        //阻止表单默认提交行为
+        firstForm.onsubmit = function(event){
+            event.preventDefault();
+        }
+
+        //防止多次提交表单
+        register.onsubmit = function(event){
+            register.disabled = true;
+            return true;
+        }
+    </script>
+</body>
+</html>
