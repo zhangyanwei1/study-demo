@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: fixed;
+            margin-bottom: 20px;
+        }
+        .table td{
+            padding: 5px 10px;
+        }
+        .table td:nth-of-type(2n + 1) {
+            font-weight: bold;
+            width: 12%;
+            background-color: #eee;
+        }
+        .param{
+            width: 80%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+    <a href="http://xgtxxxx.iteye.com/blog/2088358">table添加table-layout:fixed属性和colspan后列宽调整无效问题</a>
+    
+    <table class="table" border="1">
+        <thead>
+        
+        </thead>
+        <tbody>
+            <colgroup> 
+                <col width="12%"></col> 
+                <col></col> 
+                <col width="12%"></col> 
+                <col></col> 
+            </colgroup>
+            <tr>
+                <td>表头</td>
+                <td colspan="3">内容</td>
+            </tr>
+            <tr>
+                <td>表头</td>
+                <td>第三节课</td>
+                <td>表头</td>
+                <td>内容</td>
+            </tr>
+            <tr>
+                <td>表头</td>
+                <td>内容</td>
+                <td>表头</td>
+                <td>内容</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table" border="1">
+        <thead>
+        
+        </thead>
+        <tbody>
+            <tr>
+                <td>表头</td>
+                <td colspan="3">内容</td>
+            </tr>
+            <tr>
+                <td>表头</td>
+                <td>内容内容内容内容内容内容内容</td>
+                <td>表头</td>
+                <td>内容</td>
+            </tr>
+            <tr>
+                <td>表头</td>
+                <td>内容</td>
+                <td>表头</td>
+                <td>内容</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table" border="1">
+        <thead>
+        
+        </thead>
+        <tbody>
+            <tr>
+                <td>表头</td>
+                <td>内容内容内容内容内容内容内容</td>
+                <td>表头</td>
+                <td>内容</td>
+            </tr>
+             <tr>
+                <td>表头</td>
+                <td colspan="3">内容</td>
+            </tr>
+            <tr>
+                <td>表头</td>
+                <td>内容</td>
+                <td>表头</td>
+                <td>内容</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
