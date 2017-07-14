@@ -113,4 +113,4 @@ methods:{
   }
 }
 ```
-<a href="" target="_blank">利用input自定义事件的组件demo</a>
+<a href="https://github.com/zhangyanwei1/study-demo/blob/master/vue/v-form.html" target="_blank">利用input自定义事件的组件demo</a>
