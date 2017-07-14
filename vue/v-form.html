@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue学习-自定义事件的表单输入组件</title>
+</head>
+<body>
+	<div id="example">
+		<input v-model="something"><span>{{something}}</span>
+		<div>			
+			<input
+				v-bind:value="something1"
+				v-on:input="inputSome">
+				<span>{{something1}}</span>
+		</div>
+		<currency-input 
+			label="数字1" 
+			v-model="price1"
+		></currency-input>
+		<currency-input 
+			label="数字2" 
+			v-model="price2"
+		></currency-input>
+		<span>总和: {{ total }}</span>
+	</div>
+	
+	<script type="text/javascript" src="./vue.js"></script>
+	<script>
+		Vue.component('currency-input', {
+			template: '\
+				<div>\
+				<label v-if="label">{{ label }}</label>\
+				$\
+				<input\
+					ref="input"\
+					v-bind:value="value"\
+					v-on:input="updateValue($event.target.value)"\
+					v-on:blur="formatValue"\
+				>\
+				</div>\
+			',
+			props: {
+				value: {
+					type: Number,
+					default: 0
+				},
+				label: {
+					type: String,
+					default: ''
+				}
+			},
+			mounted: function () {
+				this.formatValue()
+			},
+			methods: {
+				updateValue: function (value) {
+					this.$refs.input.value = value.replace(/\D/g,'');
+					var _value =parseInt(this.$refs.input.value);
+					this.$emit('input', _value);
+				},
+				formatValue:function(){
+					this.$refs.input.value = value.replace(/\D/g,'');
+				}
+			}
+		})
+
+		new Vue({
+			el:'#example',
+			data:{
+				something:'',
+				something1:'',
+				price1: 0,
+				price2: 0
+			},
+			methods:{
+				inputSome:function(event){
+					this.something1 = event.target.value;
+				}
+			},
+			computed: {
+				total:function(){
+					return this.price1+this.price2;
+				}
+			}
+		})
+	</script>
+</body>
+</html>

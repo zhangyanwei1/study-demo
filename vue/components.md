@@ -99,3 +99,18 @@ type:
 + Object
 + Array
 + Symbol
+#### 使用自定义输入事件的表单组件
+v-model相当于如下自定义事件
+```
+<input
+  v-bind:value="something1"
+  v-on:input="inputSome">
+  <span>{{something1}}</span>
+
+methods:{
+  inputSome:function(event){
+    this.something1 = event.target.value;
+  }
+}
+```
+<a href="" target="_blank">利用input自定义事件的组件demo</a>
