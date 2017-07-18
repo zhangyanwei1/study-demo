@@ -22,7 +22,18 @@
         <button-counter v-on:increment="incrementTotal"></button-counter>
         <button-counter v-on:increment="incrementTotal"></button-counter>
     </div>
-    
+    <div id="slot">
+        <div>
+            <h1>我是父组件的标题</h1>
+            <my-component>
+            </my-component>
+            <my-component>
+                <p>这是一些初始化内容</p>
+                <p>这是一些初始化内容</p>
+                <p slot="footer">这是底部的一些初始化内容</p>
+            </my-component>
+        </div>
+    </div>
     <script src="./vue.js"></script>
     <script>
         Vue.component('my-component',{
@@ -75,6 +86,23 @@
                 incrementTotal: function () {
                 this.total += 1
                 }
+            }
+        })
+        var myComponent = {
+            template:'\
+                <div>\
+                    <h2>我是子组件的标题</h2>\
+                    <slot>\
+                        只有在没有要分发的内容时才会显示。\
+                    </slot>\
+                    <slot name="footer">这是具有名字的slot</slot>\
+                </div>\
+                '
+        }
+        new Vue({
+            el:'#slot',
+            components:{
+                'my-component': myComponent
             }
         })
     </script>

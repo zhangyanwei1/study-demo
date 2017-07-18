@@ -114,3 +114,52 @@ methods:{
 }
 ```
 <a href="https://github.com/zhangyanwei1/study-demo/blob/master/vue/v-form.html" target="_blank">利用input自定义事件的组件demo</a>
+#### 编译作用域
+> 父组件模板的内容在父组件作用域内编译；子组件模板的内容在子组件作用域内编译。
+
+#### slot 分发 & 具名slot
+> 为了让组件可以组合，我们需要一种方式来混合父组件的内容与子组件自己的模板。这个过程被称为 内容分发
+```
+<div id="slot">
+    <div>
+        <h1>我是父组件的标题</h1>
+        <my-component>
+        </my-component>
+        <my-component>
+            <p>这是一些初始化内容</p>
+            <p>这是一些初始化内容</p>
+            <p slot="footer">这是底部的一些初始化内容</p>
+        </my-component>
+    </div>
+</div>
+//js
+var myComponent = {
+    template:'\
+        <div>\
+            <h2>我是子组件的标题</h2>\
+            <slot>\
+                只有在没有要分发的内容时才会显示。\
+            </slot>\
+            <slot name="footer">这是具有名字的slot</slot>\
+        </div>\
+        '
+}
+new Vue({
+    el:'#slot',
+    components:{
+        'my-component': myComponent
+    }
+})
+//渲染结果
+
+我是父组件的标题
+
+我是子组件的标题
+只有在没有要分发的内容时才会显示。 这是具有名字的slot
+
+
+我是子组件的标题
+这是一些初始化内容
+这是一些初始化内容
+这是底部的一些初始化内容
+```
