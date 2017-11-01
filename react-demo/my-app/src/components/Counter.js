@@ -10,7 +10,7 @@ class Counter extends Component {
 
     incrementIfOdd() {
         if (this.props.value % 2 !== 0) {
-        this.props.onIncrement()
+            this.props.onIncrement()
         }
     }
 
@@ -36,7 +36,7 @@ class Counter extends Component {
                 </button>
                 {' '}
                 <button onClick={this.incrementAsync}>
-                异步+1
+                间隔一秒+1
                 </button>
             </p>
         )

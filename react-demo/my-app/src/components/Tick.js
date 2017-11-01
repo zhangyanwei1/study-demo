@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import '../style/App.css';
 
-export class App extends Component {
+class App extends Component {
   render() {
     return (
       <div className="App">
@@ -14,7 +13,7 @@ export class App extends Component {
   }
 }
 
-export class Tick extends Component {
+class Tick extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -53,10 +52,12 @@ export class Tick extends Component {
   render() {
     return (
       <div>
-        <h1>Hello，{this.props.name.length>0 && "World"}</h1>
+        <h1>Hello，{this.props.name}</h1>
         <h2>It is {this.state.date.toLocaleTimeString()}</h2>
         <button onClick={this.handleClick.bind(this)}>{this.state.on ? 'on' : 'off'}</button>
       </div>
     )
   }
 }
+
+export default App
