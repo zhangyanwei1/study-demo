@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../node_modules/seajs/dist/sea.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+    // seajs 的简单配置
+    seajs.config({
+        base: "../node_modules/",
+        // 设置别名调用
+        alias: {
+            "jquery": "jquery/dist/jquery.min.js",
+        },
+        // 当目录比较深，或需要跨目录调用模块时，可以使用 paths 来简化书写。
+        path: {
+            "underscore": "/node_modules/underscore"
+        }
+    });
+
+    // 加载入口模块
+    seajs.use("../static/hello/src/main");
+    </script>
+</body>
+</html>

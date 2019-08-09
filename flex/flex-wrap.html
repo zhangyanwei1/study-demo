@@ -6,12 +6,77 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>flex-wrap</title>
     <style>
+        .inline-flex{
+            width: 400px;
+            margin-right: 20px;
+        }
         .flex{
             display: flex;
+        }
+        .flex-item{
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            background-color: #ddd;
+        }
+        .min-width{
+            min-width: 100px;
+        }
+        .wrap{
+            flex-wrap: wrap;
+        }
+        .wrap-reverse{
+            flex-wrap: wrap-reverse;
         }
     </style>
 </head>
 <body>
-    
+    <div class="flex flex-wrap">
+        <div>
+            <p>flex-wrap: wrap</p>
+            <div class="flex inline-flex">
+                <div class="flex-item min-width">1 min-width</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+                <div class="flex-item">4</div>
+                <div class="flex-item">5</div>
+                <div class="flex-item">6</div>
+                <div class="flex-item">7</div>
+                <div class="flex-item">8</div>
+                <div class="flex-item">9</div>
+                <div class="flex-item">10</div>
+            </div>
+        </div>
+        <div>
+            <p>flex-wrap: wrap</p>
+            <div class="flex wrap inline-flex">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+                <div class="flex-item">4</div>
+                <div class="flex-item">5</div>
+                <div class="flex-item">6</div>
+                <div class="flex-item">7</div>
+                <div class="flex-item">8</div>
+                <div class="flex-item">9</div>
+                <div class="flex-item">10</div>
+            </div>
+        </div>
+        <div>
+            <p>flex-wrap: wrap-reverse</p>
+            <div class="flex wrap-reverse inline-flex">
+                <div class="flex-item">1</div>
+                <div class="flex-item">2</div>
+                <div class="flex-item">3</div>
+                <div class="flex-item">4</div>
+                <div class="flex-item">5</div>
+                <div class="flex-item">6</div>
+                <div class="flex-item">7</div>
+                <div class="flex-item">8</div>
+                <div class="flex-item">9</div>
+                <div class="flex-item">10</div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
