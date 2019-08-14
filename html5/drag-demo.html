@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drag 收藏夹实例</title>
+    <style>
+        .item-list{
+            overflow: hidden;
+        }
+        .item{
+            width: 100px;
+            height: 50px;
+            background: pink;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+        .bottom{
+            overflow: hidden;
+        }
+        .target-box{
+            float: left;
+            width: 600px;
+            height: 600px;
+            border: 1px solid orange;
+            margin-right: 20px;
+        }
+        .dashed-box{
+            float: left;
+            width: 200px;
+            height: 200px;
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="item-list" id="J-drag">
+        <div class="item" draggable="true">项目一</div>
+        <div class="item" draggable="true">项目二</div>
+        <div class="item" draggable="true">项目三</div>
+        <div class="item" draggable="true">项目四</div>
+        <div class="item" draggable="true">项目五</div>
+    </div>
+    <div class="bottom">
+        <div class="target-box" id="J-target">
+            <span>收藏</span>
+        </div>
+        <div class="dashed-box" id="J-dashed">
+            垃圾桶
+        </div>
+    </div>
+    <script>
+        var drag = document.getElementById('J-drag');
+        var target = document.getElementById('J-target');
+        var dashed = document.getElementById('J-dashed');
+        // 从外面拖动进收藏夹
+        drag.ondragstart = function (e) {
+            if (e.target.className === 'item') {
+                e.dataTransfer.setData('item', e.target.innerHTML);
+            }
+        };
+        // 从收藏夹拖动
+        target.ondragstart = function(e) {
+            if (e.target.className === 'item') {
+                e.dataTransfer.setData('remove-item', e.target.id);
+            }
+        }
+        // 收藏夹放置
+        target.ondrop = function(e) {
+            var item = e.dataTransfer.getData('item');
+            if(item) {
+                var newEl = document.createElement('div');
+                newEl.className = 'item';
+                newEl.draggable = true;
+                newEl.innerHTML = item;
+                newEl.id = 'item' + new Date().getTime();
+                target.append(newEl);
+            }
+        }
+        // 垃圾桶放置
+        dashed.ondrop = function(e) {
+            var dashItemId = e.dataTransfer.getData('remove-item');
+            if (dashItemId) {
+                target.removeChild(document.getElementById(dashItemId));
+            }
+        }
+
+        // 取消拖动元素离开本元素时的默认行为
+        document.ondragover = function(e) {
+            return false;
+        }
+        document.ondrop = function(e) {
+            return false;
+        }
+    </script>
+</body>
+</html>

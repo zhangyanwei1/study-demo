@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>html5 拖放</title>
+    <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+    <style>
+        .drap{
+            padding: 10px 20px;
+            background: orange;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        .target{
+            width: 200px;
+            height: 100px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <span id="drapSrc" class="drap" draggable="true" ondragstart="handleStart(event)">可拖放的元素</span>
+    <div id='target' class="dropabled target">放置在这里</div>
+    <script>
+        function handleStart(e) {
+            // 原生JavaScript事件对象和jquery事件对象不一致
+            console.log(e);
+        }
+        var drapSrc = $('#drapSrc');
+        var target = $('#target');
+        drapSrc.on('dragstart', function(e) {
+            console.log('dragstart元素开始拖动时触发');
+            // e.dataTransfer.setData("Text",e.target.id);
+            console.log(e);
+        });
+        drapSrc.on('drag', function() {
+            console.log('drag元素拖动过程中反复触发');
+        });
+        drapSrc.on('dragend', function() {
+            console.log('dragend元素拖动完成时触发');
+        });
+
+        target.on('dragenter', function(e) {
+            console.log('dragenter当元素进入目的地时触发')
+            // 阻止浏览器默认行为
+            e.preventDefault()
+        });
+        target.on('dragover', function(e) {
+            console.log('dragover当元素在目的地时触发')
+            // 阻止浏览器默认行为
+            e.preventDefault()
+        });
+        target.on('dragleave', function(e) {
+            console.log('dragleave当元素离开目的地时触发')
+            // 阻止浏览器默认行为
+            e.preventDefault()
+        });
+        target.on('drop', function(e) {
+            console.log('drop当元素在目的地放下时触发')
+            // 阻止浏览器默认行为
+            e.preventDefault();
+            target.append(drapSrc);
+        });
+    </script>
+</body>
+</html>
